@@ -1,38 +1,41 @@
-# Lolpage
+Idée du site 
 
-This template should help get you started developing with Vue 3 in Vite.
+page dacceuil 
+-----------------------------
+---> CHAMPION
+---> ITEM
+--->RUNES ( a voir )
+---> PRE BUILD ( champion item et runes cmbiné)
+---> account  
 
-## Recommended IDE Setup
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+page Champion 
+-------------------------------------
+champion liste 
+  -> image , stat , spell  , role principal 
+  -> ajouter a un prebuild
 
-## Recommended Browser Setup
+page Item 
+--------------------------------------
+item liste
+  -> prix , caracteristique 
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+page runes 
+--------------------------------------
+liste runes 
+  -> caracteristique 
 
-## Customize configuration
+page pre build
+---------------------------------------
+liste des pre build 
+  -> champion, runes , items 
+  -> filtre 
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+page accout 
+---------------------------------------
+liste pseudo
+  -> caracteristique
+  -> derniere partie jouer 
 
-## Project Setup
 
-```sh
-npm install
-```
 
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
