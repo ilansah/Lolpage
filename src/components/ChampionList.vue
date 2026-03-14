@@ -46,9 +46,10 @@ const getChampionColor = (tags) => {
     <div v-else-if="error" class="error">{{ error }}</div>
     
     <div v-else class="champions-grid">
-      <div 
-        v-for="champion in champions" 
-        :key="champion.id" 
+      <router-link
+        v-for="champion in champions"
+        :key="champion.id"
+        :to="{ name: 'champion-detail', params: { id: champion.id } }"
         class="champion-card"
         :style="{ borderColor: getChampionColor(champion.tags) }"
       >
@@ -56,16 +57,16 @@ const getChampionColor = (tags) => {
         <h3>{{ champion.name }}</h3>
         <p class="title">{{ champion.title }}</p>
         <div class="tags">
-          <span 
-            v-for="tag in champion.tags" 
-            :key="tag" 
+          <span
+            v-for="tag in champion.tags"
+            :key="tag"
             class="tag"
             :style="{ backgroundColor: getChampionColor([tag]) }"
           >
             {{ tag }}
           </span>
         </div>
-      </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -99,6 +100,9 @@ h2 {
 }
 
 .champion-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
   background: linear-gradient(135deg, #1e2328 0%, #0a1428 100%);
   border: 3px solid #785a28;
   border-radius: 8px;
