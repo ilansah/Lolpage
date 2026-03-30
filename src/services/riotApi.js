@@ -240,6 +240,48 @@ export const DataDragonService = {
   },
 
   /**
+   * Récupère tous les items du shop ranked
+   * @param {string} version - Version de Data Dragon
+   * @param {string} language - Langue
+   * @returns {Promise} Données des items du shop ranked
+   */
+  async getRankedShopItems(version = null, language = 'fr_FR') {
+    try {
+      if (!version) {
+        version = await this.getLatestVersion();
+      }
+      const response = await axios.get(
+        `${DDRAGON_URL}/cdn/${version}/data/${language}/item.json`
+      );
+      
+      // Filtre les items pour ne garder que ceux du shop ranked
+      const allItems = Object.entries(response.data.data)
+        .filter(([_, item]) => item.inStore !== false && item.maps && item.maps["11"] === true)
+        .map(([id, item]) => ({
+          id,
+          name: item.name,
+          gold: item.gold?.total || 0,
+          imageUrl: this.getItemImageUrl(id, version)
+        }));
+      
+      // Déduplique par nom en gardant le plus ancien (ID le plus faible)
+      const seen = new Set();
+      return allItems
+        .filter(item => {
+          if (seen.has(item.name)) {
+            return false;
+          }
+          seen.add(item.name);
+          return true;
+        })
+        .sort((a, b) => a.name.localeCompare(b.name));
+    } catch (error) {
+      console.error('Erreur lors de la récupération des items du shop ranked:', error);
+      throw error;
+    }
+  },
+
+  /**
    * Génère l'URL d'une image de rune
    * @param {string} runePath - Chemin de la rune
    * @returns {string} URL de l'image

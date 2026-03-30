@@ -1,11 +1,9 @@
 <script setup>
-
+import ItemList from '../components/ItemList.vue';
 </script>
 
 <template>
-  <div>
-    <h1>Items Page</h1>
-  </div>
+  <ItemList />
 </template>
 
 <style scoped>

@@ -5,6 +5,7 @@ import item from '../pages/item.vue';
 import runes from '../pages/runes.vue';
 import preBuild from '../pages/preBuild.vue';
 import ChampionDetail from '../components/ChampionDetail.vue';
+import ItemDetail from '../components/ItemDetail.vue';
 
 const routes = [
     {
@@ -26,6 +27,11 @@ const routes = [
         path: '/items',
         name: 'items',
         component: item,
+    },
+    {
+        path: '/items/:id',
+        name: 'item-detail',
+        component: ItemDetail,
     },
     {
         path: '/runes',
