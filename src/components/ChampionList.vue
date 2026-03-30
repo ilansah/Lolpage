@@ -1,10 +1,17 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { DataDragonService } from '../services/riotApi';
 
 const champions = ref([]);
 const loading = ref(true);
 const error = ref(null);
+const searchQuery = ref('');
+
+const filteredChampions = computed(() => {
+  const q = searchQuery.value.trim().toLowerCase();
+  if (!q) return champions.value;
+  return champions.value.filter(c => c.name.toLowerCase().includes(q));
+});
 
 onMounted(async () => {
   try {
@@ -45,9 +52,20 @@ const getChampionColor = (tags) => {
     <div v-if="loading" class="loading">Chargement...</div>
     <div v-else-if="error" class="error">{{ error }}</div>
     
-    <div v-else class="champions-grid">
+    <div v-else>
+      <div class="search-wrap">
+        <input
+          v-model="searchQuery"
+          type="text"
+          placeholder="Rechercher un champion…"
+          class="search-input"
+        />
+        <span class="search-count">{{ filteredChampions.length }} champion{{ filteredChampions.length > 1 ? 's' : '' }}</span>
+      </div>
+      <p v-if="filteredChampions.length === 0" class="no-result">Aucun champion trouvé.</p>
+    <div class="champions-grid">
       <router-link
-        v-for="champion in champions"
+        v-for="champion in filteredChampions"
         :key="champion.id"
         :to="{ name: 'champion-detail', params: { id: champion.id } }"
         class="champion-card"
@@ -67,6 +85,7 @@ const getChampionColor = (tags) => {
           </span>
         </div>
       </router-link>
+    </div>
     </div>
   </div>
 </template>
@@ -91,6 +110,46 @@ h2 {
 
 .error {
   color: #e74c3c;
+}
+
+.search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.search-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(200, 155, 60, 0.4);
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  color: #f0e6d2;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-input::placeholder {
+  color: #a09b8c;
+}
+
+.search-input:focus {
+  border-color: #c89b3c;
+  box-shadow: 0 0 0 2px rgba(200, 155, 60, 0.15);
+}
+
+.search-count {
+  color: #a09b8c;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.no-result {
+  text-align: center;
+  color: #a09b8c;
+  padding: 2rem;
 }
 
 .champions-grid {

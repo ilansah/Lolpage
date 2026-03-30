@@ -41,8 +41,9 @@ function splashUrl() {
   return `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion.value.id}_0.jpg`;
 }
 
-function spellUrl(spellId) {
-  return DataDragonService.getSpellImageUrl(spellId, version.value);
+function spellUrl(spell) {
+  const v = version.value || '15.6.1';
+  return `https://ddragon.leagueoflegends.com/cdn/${v}/img/spell/${spell.image.full}`;
 }
 
 function passiveUrl() {
@@ -129,7 +130,7 @@ const keyLabels = ['P', 'Q', 'W', 'E', 'R'];
               class="spell-row"
             >
               <div class="spell-icon-wrap">
-                <img :src="spellUrl(spell.image.full)" :alt="spell.name" />
+                <img :src="spellUrl(spell)" :alt="spell.name" />
                 <span class="key-label">{{ keyLabels[i + 1] }}</span>
               </div>
               <div class="spell-info">
