@@ -9,6 +9,7 @@
       <router-link to="/items">ItemsPage</router-link>
       <router-link to="/runes">RunesPage</router-link>
       <router-link to="/prebuild">Pre-BuildPage</router-link>
+      <router-link to="/leaderboard">Leaderboard</router-link>
     </nav>
     <router-view />
   </div>

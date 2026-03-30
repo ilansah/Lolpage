@@ -4,9 +4,11 @@ import champion from '../pages/champion.vue';
 import item from '../pages/item.vue';
 import runes from '../pages/runes.vue';
 import preBuild from '../pages/preBuild.vue';
+import leaderboard from '../pages/leaderboard.vue';
 import ChampionDetail from '../components/ChampionDetail.vue';
 import ItemDetail from '../components/ItemDetail.vue';
 import RuneDetail from '../components/RuneDetail.vue';
+import profile from '../pages/profile.vue';
 
 const routes = [
     {
@@ -48,6 +50,16 @@ const routes = [
         path: '/prebuild',
         name: 'prebuild',
         component: preBuild,
+    },
+    {
+        path: '/leaderboard',
+        name: 'leaderboard',
+        component: leaderboard,
+    },
+    {
+        path: '/profile/:region/:puuid',
+        name: 'profile',
+        component: profile,
     },
 ];
 
