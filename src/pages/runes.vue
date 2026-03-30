@@ -1,11 +1,9 @@
 <script setup>
-
+import RuneList from '../components/RuneList.vue';
 </script>
 
 <template>
-  <div>
-    <h1>Runes Page</h1>
-  </div>
+  <RuneList />
 </template>
 
 <style scoped>

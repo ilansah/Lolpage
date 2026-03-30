@@ -288,6 +288,38 @@ export const DataDragonService = {
    */
   getRuneImageUrl(runePath) {
     return `${DDRAGON_URL}/cdn/img/${runePath}`;
+  },
+
+  /**
+   * Récupère les runes principales de la saison 15
+   * @param {string} version - Version de Data Dragon
+   * @param {string} language - Langue
+   * @returns {Promise} Données des runes principales
+   */
+  async getRankedRunes(version = null, language = 'fr_FR') {
+    try {
+      if (!version) {
+        version = await this.getLatestVersion();
+      }
+      const response = await axios.get(
+        `${DDRAGON_URL}/cdn/${version}/data/${language}/runesReforged.json`
+      );
+      
+      // Récupère les arbres de runes principales (paths)
+      const runes = response.data.map(tree => ({
+        id: tree.id,
+        name: tree.name,
+        key: tree.key,
+        icon: tree.icon,
+        imageUrl: this.getRuneImageUrl(tree.icon),
+        slots: tree.slots || []
+      }));
+      
+      return runes;
+    } catch (error) {
+      console.error('Erreur lors de la récupération des runes:', error);
+      throw error;
+    }
   }
 };
 

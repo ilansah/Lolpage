@@ -6,6 +6,7 @@ import runes from '../pages/runes.vue';
 import preBuild from '../pages/preBuild.vue';
 import ChampionDetail from '../components/ChampionDetail.vue';
 import ItemDetail from '../components/ItemDetail.vue';
+import RuneDetail from '../components/RuneDetail.vue';
 
 const routes = [
     {
@@ -37,6 +38,11 @@ const routes = [
         path: '/runes',
         name: 'runes',
         component: runes,
+    },
+    {
+        path: '/runes/:id',
+        name: 'rune-detail',
+        component: RuneDetail,
     },
     {
         path: '/prebuild',
