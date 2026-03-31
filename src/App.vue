@@ -1,17 +1,10 @@
 <script setup>
+import NavBar from './components/NavBar.vue';
 </script>
 
 <template>
-  <div class="nav-bar">
-    <nav>
-      <router-link to="/">HomePage</router-link>
-      <router-link to="/champions">ChampionsPage</router-link>
-      <router-link to="/items">ItemsPage</router-link>
-      <router-link to="/runes">RunesPage</router-link>
-      <router-link to="/prebuild">Pre-BuildPage</router-link>
-      <router-link to="/leaderboard">Leaderboard</router-link>
-      <router-link to="/favorites">Favoris</router-link>
-    </nav>
+  <div id="app">
+    <NavBar />
     <router-view />
   </div>
 </template>

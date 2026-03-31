@@ -58,7 +58,7 @@ onMounted(async () => {
           </button>
           <img :src="item.imageUrl" :alt="item.name" />
           <h3>{{ item.name }}</h3>
-          <p class="price">{{ item.gold }} 💰</p>
+          <p class="price">{{ item.gold }} Gold</p>
         </router-link>
       </div>
     </div>
