@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { DataDragonService } from '../services/riotApi';
+import { toggleFavChampion, isFavChampion } from '../store/favoris';
 
 const champions = ref([]);
 const loading = ref(true);
@@ -71,6 +72,10 @@ const getChampionColor = (tags) => {
         class="champion-card"
         :style="{ borderColor: getChampionColor(champion.tags) }"
       >
+        <button class="fav-btn" @click.prevent="toggleFavChampion(champion)" title="Favoris">
+          <span v-if="isFavChampion(champion.id)">★</span>
+          <span v-else>☆</span>
+        </button>
         <img :src="champion.imageUrl" :alt="champion.name" />
         <h3>{{ champion.name }}</h3>
         <p class="title">{{ champion.title }}</p>
@@ -159,6 +164,7 @@ h2 {
 }
 
 .champion-card {
+  position: relative;
   display: block;
   text-decoration: none;
   color: inherit;
@@ -169,6 +175,30 @@ h2 {
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
+}
+
+.fav-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  color: #c89b3c;
+  cursor: pointer;
+  padding: 5px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.fav-btn:hover {
+  transform: scale(1.1);
+  color: #f0e6d2;
 }
 
 .champion-card:hover {

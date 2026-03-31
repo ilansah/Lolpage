@@ -9,6 +9,7 @@ import ChampionDetail from '../components/ChampionDetail.vue';
 import ItemDetail from '../components/ItemDetail.vue';
 import RuneDetail from '../components/RuneDetail.vue';
 import profile from '../pages/profile.vue';
+import favorites from '../pages/favorites.vue';
 
 const routes = [
     {
@@ -60,6 +61,11 @@ const routes = [
         path: '/profile/:region/:puuid',
         name: 'profile',
         component: profile,
+    },
+    {
+        path: '/favorites',
+        name: 'favorites',
+        component: favorites,
     },
 ];
 

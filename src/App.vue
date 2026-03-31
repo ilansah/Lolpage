@@ -10,6 +10,7 @@
       <router-link to="/runes">RunesPage</router-link>
       <router-link to="/prebuild">Pre-BuildPage</router-link>
       <router-link to="/leaderboard">Leaderboard</router-link>
+      <router-link to="/favorites">Favoris</router-link>
     </nav>
     <router-view />
   </div>

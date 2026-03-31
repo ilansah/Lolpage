@@ -2,6 +2,7 @@
 import { ref, computed, onMounted } from 'vue';
 import { DataDragonService } from '../services/riotApi';
 import SearchBar from './SearchBar.vue';
+import { toggleFavItem, isFavItem } from '../store/favoris';
 
 const items = ref([]);
 const loading = ref(true);
@@ -51,6 +52,10 @@ onMounted(async () => {
           :to="{ name: 'item-detail', params: { id: item.id } }"
           class="item-card"
         >
+          <button class="fav-btn" @click.prevent="toggleFavItem(item)" title="Favoris">
+            <span v-if="isFavItem(item.id)">★</span>
+            <span v-else>☆</span>
+          </button>
           <img :src="item.imageUrl" :alt="item.name" />
           <h3>{{ item.name }}</h3>
           <p class="price">{{ item.gold }} 💰</p>
@@ -96,6 +101,7 @@ h2 {
 }
 
 .item-card {
+  position: relative;
   display: block;
   text-decoration: none;
   color: inherit;
@@ -106,6 +112,30 @@ h2 {
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
+}
+
+.fav-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  color: #c89b3c;
+  cursor: pointer;
+  padding: 5px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.fav-btn:hover {
+  transform: scale(1.1);
+  color: #f0e6d2;
 }
 
 .item-card:hover {
